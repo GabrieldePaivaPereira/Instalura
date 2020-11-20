@@ -1,51 +1,24 @@
-import React, { 
-  Fragment, 
-  useEffect, 
-  useState 
-} from 'react';
+import 'react-native-gesture-handler';
+import React from 'react';
 
-import { 
-  ScrollView,
-  FlatList
-} from "react-native";
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
 
-import {Cabecalho} from './app/components/Cabecalho';
-import {Comentarios} from './app/components/Comentarios';
-import {Foto} from './app/components/Foto';
+import Feed from './app/views/Feed/Feed.js'
+import Login from './app/views/Login/Login.js'
 
-import lerFotos from './app/api/feed'
 
+const navigation = createStackNavigator({
+  Login: { screen: Login},
+  Feed: { screen: Feed}
+});
+
+const AppContainer = createAppContainer(navigation)
 
 const App = () => {
-  const [fotos, setFotos] = useState([])
-
-  useEffect(() => {
-    lerFotos(setFotos);
-  }, [])
-
-  return (
-      <FlatList
-        data = {fotos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item} )=>
-          <Fragment>
-            <Cabecalho 
-              usuario={item.userName}
-              urlPhoto={item.userURL}
-            />
-            <Foto 
-              url={item.url}
-              descricao={item.description}
-              qtdLikes={item.likes}
-            />
-            <Comentarios comentarios={item.comentarios}/>
-          </Fragment>
-        }
-      />
-      
+  return(
+    <AppContainer/>
   );
 };
-
-
 
 export default App;

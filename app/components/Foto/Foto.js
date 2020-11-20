@@ -8,11 +8,14 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import { curtirFoto, imgLike } from '../../api/curtidas';
 
 import style from "./style"
 
-const Foto = ({url, descricao, qtdLikes}) => {
+const Foto = ({url, 
+        descricao, 
+        qtdLikes, 
+        curtirFoto, 
+        imgLike}) => {
     const [curtiu, setCurtiu] = useState(false)
     const [likes, setLikes] = useState(qtdLikes)
 

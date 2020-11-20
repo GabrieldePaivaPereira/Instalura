@@ -13,16 +13,14 @@ import {
 
 import style from './style';
 
-const Comentarios = ( {comentarios} ) => {
+const Comentarios = ( {comentarios, enviarComentario} ) => {
     const [estComentarios, setComentarios] = useState(comentarios);
+    
     const addComment = () => {
         campoInput.clear();
-        const novoComentario = {
-            date: Date.now(),
-            text: conteudoCampoInput,
-            userName: "paiva"
-        };
-        setComentarios([...estComentarios, novoComentario]);
+        setComentarios([...estComentarios, 
+            enviarComentario({conteudo: conteudoCampoInput, userName: "paiva"})
+        ]);
     };
 
     let campoInput;
